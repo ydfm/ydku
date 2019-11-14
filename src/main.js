@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2019-11-09 11:40:55
- * @LastEditTime: 2019-11-11 21:47:50
+ * @LastEditTime: 2019-11-13 21:19:41
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \day13d:\workspace\yindongfm\src\main.js
@@ -14,6 +14,7 @@ import router from './router'
 import ElementUI from 'element-ui';
 import MintUI from 'mint-ui'
 import 'mint-ui/lib/style.css'
+import Axios from 'axios'
 
 import 'element-ui/lib/theme-chalk/index.css';
 import './assets/font/iconfont.css';
@@ -21,7 +22,7 @@ import './assets/font/iconfont.css';
 
 Vue.use(ElementUI);
 Vue.use(MintUI);
-
+Axios.defaults.baseURL = '/api/';
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */

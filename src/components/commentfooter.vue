@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2019-11-11 21:11:10
- * @LastEditTime: 2019-11-12 08:49:56
+ * @LastEditTime: 2019-11-13 17:35:56
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \day13d:\workspace\yindongfm\src\components\commentfooter.vue
@@ -10,8 +10,15 @@
     <div class="box">
         <div class="inputbox">
             <i class="el-icon-edit"></i>
-            <input type="text" placeholder="我来说两句">
+            <mt-button @click.native="handleClick">
+                <input type="text" placeholder="我来说两句">
+            </mt-button>          
         </div>
+        <mt-popup id="wirteBox"
+            v-model="popupVisible"
+            position="bottom">
+            <publish></publish>
+        </mt-popup>
         <div class="function">
             <div>
                 <i class="iconfont icon-pinglun"></i>
@@ -30,11 +37,24 @@
     </div>         
 </template>
 <script>
+import { Popup } from 'mint-ui';
+import publish from './publish'
 export default {
     data() {
         return {
+            popupVisible:false
         }
    },
+    methods:{
+        
+        handleClick:function(){
+            // debugger
+            this.popupVisible = true
+        }
+    },
+    components:{
+        publish
+    }
 }
 </script>
 <style scoped>   
@@ -74,5 +94,9 @@ input{
     justify-content: space-around;
     text-align: center;
     color: #a1a1a1;
+}
+#wirteBox{
+    width: 100%;
+    height: 1.2rem;
 }
 </style>

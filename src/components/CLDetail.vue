@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2019-11-09 19:29:05
- * @LastEditTime: 2019-11-11 10:12:35
+ * @LastEditTime: 2019-11-13 23:50:02
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \day13d:\workspace\yindongfm\src\components\CLDetail.vue
@@ -13,123 +13,47 @@
             <span>推荐</span>
         </div>
         <div class="listbox">
-            <ul>
-                <router-link to="playPage">
-                    <li>
+            <ul>          
+                <li v-for="(info,index) in infos" :key="index" >
+                    <router-link :to='"/playPage/"+info.bid'>
                         <div class="left">
-                            <h6>第001集&nbsp;&nbsp;人皮</h6>
+                            <h6>{{info.name}}</h6>
                             <p>                                               
                             <span class="date" >2019-11-01</span>
                             <i class="el-icon-caret-right"></i>
-                            <span >8316</span>                        
+                            <span >{{book.pageviews}}</span> 
+                            <span>{{info.bid}}</span>                       
                             </p>
                         </div>
                         <div class="right">
                             <i class="el-icon-download"></i>
                         </div>
-                    </li>
-                </router-link>
-                <li>
-                    <div class="left">
-                        <h6>第001集&nbsp;&nbsp;人皮</h6>
-                        <p>                                               
-                        <span class="date" >2019-11-01</span>
-                        <i class="el-icon-caret-right"></i>
-                        <span >8316</span>                        
-                        </p>
-                    </div>
-                    <div class="right">
-                        <i class="el-icon-download"></i>
-                    </div>
-                </li>
-                <li>
-                    <div class="left">
-                        <h6>第001集&nbsp;&nbsp;人皮</h6>
-                        <p>                                               
-                        <span class="date" >2019-11-01</span>
-                        <i class="el-icon-caret-right"></i>
-                        <span >8316</span>                        
-                        </p>
-                    </div>
-                    <div class="right">
-                        <i class="el-icon-download"></i>
-                    </div>
-                </li>
-                <li>
-                    <div class="left">
-                        <h6>第001集&nbsp;&nbsp;人皮</h6>
-                        <p>                                               
-                        <span class="date" >2019-11-01</span>
-                        <i class="el-icon-caret-right"></i>
-                        <span >8316</span>                        
-                        </p>
-                    </div>
-                    <div class="right">
-                        <i class="el-icon-download"></i>
-                    </div>
-                </li>
-                <li>
-                    <div class="left">
-                        <h6>第001集&nbsp;&nbsp;人皮</h6>
-                        <p>                                               
-                        <span class="date" >2019-11-01</span>
-                        <i class="el-icon-caret-right"></i>
-                        <span >8316</span>                        
-                        </p>
-                    </div>
-                    <div class="right">
-                        <i class="el-icon-download"></i>
-                    </div>
-                </li>
-                <li>
-                    <div class="left">
-                        <h6>第001集&nbsp;&nbsp;人皮</h6>
-                        <p>                                               
-                        <span class="date" >2019-11-01</span>
-                        <i class="el-icon-caret-right"></i>
-                        <span >8316</span>                        
-                        </p>
-                    </div>
-                    <div class="right">
-                        <i class="el-icon-download"></i>
-                    </div>
-                </li>
-                <li>
-                    <div class="left">
-                        <h6>第001集&nbsp;&nbsp;人皮</h6>
-                        <p>                                               
-                        <span class="date" >2019-11-01</span>
-                        <i class="el-icon-caret-right"></i>
-                        <span >8316</span>                        
-                        </p>
-                    </div>
-                    <div class="right">
-                        <i class="el-icon-download"></i>
-                    </div>
-                </li>
-                 <li>
-                    <div class="left">
-                        <h6>第001集&nbsp;&nbsp;人皮</h6>
-                        <p>                                               
-                        <span class="date" >2019-11-01</span>
-                        <i class="el-icon-caret-right"></i>
-                        <span >8316</span>                        
-                        </p>
-                    </div>
-                    <div class="right">
-                        <i class="el-icon-download"></i>
-                    </div>
-                </li>
+                    </router-link>
+                </li>               
             </ul>
         </div>
     </div>
 </template>
 <script>
+import axios from 'axios';
 export default {
+    props: [],
     data() {
-      return {
-      }
-    },
+        return {
+            book:{},
+            infos:[]
+        }
+        },
+    created(){
+        axios.get('/list')      
+         .then(res=>{
+            this.book=res.data[0]
+            this.infos=res.data[0].menu4
+         })
+         .catch(err=>{
+               console.log("错误"+err);
+         }); 
+    }
 }
 </script>
 <style scoped>
@@ -148,6 +72,9 @@ export default {
     color:#686868;
     justify-content: space-around;
 } 
+/* .navigation {
+    border-bottom: 1px solid #686868;
+} */
 ul{
     width: 100%;
     height: 4rem; 
@@ -172,6 +99,7 @@ ul li{
     line-height: 0.14rem;
     margin-bottom:10px;
     font-size: 0.14rem;
+    color: #070707;
 }
 .left p{
     font-size: 12px;

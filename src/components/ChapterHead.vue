@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2019-11-09 11:40:55
- * @LastEditTime: 2019-11-11 09:50:09
+ * @LastEditTime: 2019-11-12 17:07:27
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \day13d:\workspace\yindongfm\src\components\ChapterHead.vue
@@ -9,7 +9,7 @@
 <template>
   <div class="boxhead">
     <div class="left">
-      <i class="el-icon-arrow-left"></i>
+      <i class="el-icon-arrow-left" @click="back"></i>
     </div>
     <div class="right">
       <i class="el-icon-share"></i>
@@ -24,6 +24,11 @@ export default {
   data () {
     return {
 
+    }
+  },
+  methods:{
+    back:function(){
+      this.$router.go(-1)
     }
   }
 }

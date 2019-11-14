@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2019-11-11 09:50:50
- * @LastEditTime: 2019-11-12 09:26:29
+ * @LastEditTime: 2019-11-13 16:35:21
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \day13d:\workspace\yindongfm\src\pages\playPage.vue
@@ -9,8 +9,8 @@
 <template>
     <div class="box">
         <ChapterHead class="head"></ChapterHead> 
-        <playDetail class="playDetail"></playDetail> 
-        <playControl></playControl> 
+        <playDetail :id="id" class="playDetail"></playDetail> 
+        <playControl :id="id"></playControl> 
         <comment class="comment"></comment> 
         <commentfooter class="cfooter"></commentfooter> 
     </div>      
@@ -22,6 +22,7 @@ import playControl from "../components/playControl"
 import comment from "../components/comment"
 import commentfooter from "../components/commentfooter"
 export default {
+    props:['id'],
     data() {
         return {
         }

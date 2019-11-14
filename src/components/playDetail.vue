@@ -1,14 +1,14 @@
 <!--
  * @Author: your name
  * @Date: 2019-11-11 10:18:54
- * @LastEditTime: 2019-11-12 00:21:44
+ * @LastEditTime: 2019-11-14 16:23:47
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \day13d:\workspace\yindongfm\src\components\playDetail.vue
  -->
 <template>
     <div class="box">
-        <h1>少帅你老婆又跑了第01集</h1> 
+        <h1>{{infos.name}}&nbsp;&nbsp;{{play.name}}</h1> 
         <div class="view">
             <p>
                 <el-row class="block-col-2">
@@ -26,19 +26,43 @@
                 </el-col>
                 </el-row>
             </p>
-            <p><i class="el-icon-caret-right"></i>12345</p>  
+            <p><i class="el-icon-caret-right"></i>{{infos.pageviews}}</p>  
         </div>  
         <div class="img">
-            <img src="../assets/img/img.jpg" alt="">
+            <img :src="infos.pic" alt="">
         </div>        
     </div>     
 </template>
 <script>
+import axios from 'axios';
 export default {
+    props:['id'],
     data() {
-      return {
-      }
-   },
+        return {
+            infos:"",
+            menu:[],
+            play:{}    
+        }
+    },
+    created(){
+        axios.get('/list')
+         .then(res=>{ 
+            // debugger
+            // console.log(this.id);
+            this.infos=res.data[0]
+            this.menu=res.data[0].menu4
+            // console.log(this.menu)
+            for(let i=0;i<this.menu.length;i++){
+                if(this.menu[i].bid==this.id){
+                    this.play=this.menu[i]
+                    // return this.play
+                }
+            }
+         })
+         .catch(err=>{
+               console.log("错误"+err);
+         }); 
+    }
 }
 </script>
 <style scoped>
@@ -51,7 +75,7 @@ export default {
         color: #333333;
         font-size: 0.18rem;
         line-height:0.6rem;
-        margin-left: 0.26rem;
+        /* margin-left: 0.26rem; */
     }
     /* view */
     .view{

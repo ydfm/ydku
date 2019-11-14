@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2019-11-11 17:19:54
- * @LastEditTime: 2019-11-12 00:02:26
+ * @LastEditTime: 2019-11-14 00:04:10
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \day13d:\workspace\yindongfm\src\components\comment.vue
@@ -16,40 +16,20 @@
         </div>
         <div class="commentContent">
             <ul>
-                <li>
+                <li  v-for="(comment,index) in comments" :key="index">
                     <div class="logo">
                         <img src="../assets/img/head.jpg" alt="">
                     </div>
                     <div class="contentbox">
                         <div class="top">
-                            <p class="name">曾经沧海难为水</p>
+                            <p class="name">{{comment.name}}</p>
                             <p><i class="el-icon-more"></i>  </p>
                         </div>
                         <div class="content">
-                            <p>好听么</p>
+                            <p>{{comment.text}}</p>
                         </div>
                         <div class="bottom">
-                            <p>2019-10-10</p>
-                            <i class="iconfont icon-pinglun" id="pinglun"></i>  
-                            <i class="iconfont icon-thumbup"></i>  
-                        </div>
-
-                    </div>
-                </li>
-                <li>
-                    <div class="logo">
-                        <img src="../assets/img/head.jpg" alt="">
-                    </div>
-                    <div class="contentbox">
-                        <div class="top">
-                            <p class="name">曾经沧海难为水</p>
-                            <p><i class="el-icon-more"></i>  </p>
-                        </div>
-                        <div class="content">
-                            <p>好听么</p>
-                        </div>
-                        <div class="bottom">
-                            <p>2019-10-10</p>
+                            <p>{{comment.time}}</p>
                             <i class="iconfont icon-pinglun" id="pinglun"></i>  
                             <i class="iconfont icon-thumbup"></i>  
                         </div>
@@ -68,11 +48,23 @@
 <script>
 import { Popup } from 'mint-ui';
 import publish from './publish'
+import axios from 'axios';
 export default {
     data() {
         return {
-            popupVisible:false
+            popupVisible:false,
+            comments:""
         }
+    },
+    created(){
+        axios.get('/discuss')      
+         .then(res=>{
+            this.comments=res.data
+            console.log(this.comments)
+         })
+         .catch(err=>{
+               console.log("错误"+err);
+         }); 
     },
     methods:{
         
@@ -147,5 +139,8 @@ export default {
     #pinglun{
        margin-right: 0.25rem; 
     }
-
+    #wirteBox{
+        width: 100%;
+        height: 1.5rem;
+    }
 </style>
