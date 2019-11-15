@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2019-11-09 11:40:55
- * @LastEditTime: 2019-11-13 23:45:58
+ * @LastEditTime: 2019-11-15 23:21:22
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \day13d:\workspace\yindongfm\config\index.js
@@ -20,7 +20,7 @@ module.exports = {
     assetsPublicPath: '/',
     proxyTable: {
       '/api': {
-        target: 'http://localhost:3000',
+        target: 'http://yqamue.natappfree.cc',
         changeOrigin: true,
         pathRewrite: {
          	 '^/api': ''

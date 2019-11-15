@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2019-11-11 21:11:10
- * @LastEditTime: 2019-11-13 17:35:56
+ * @LastEditTime: 2019-11-15 13:27:00
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \day13d:\workspace\yindongfm\src\components\commentfooter.vue
@@ -17,7 +17,13 @@
         <mt-popup id="wirteBox"
             v-model="popupVisible"
             position="bottom">
-            <publish></publish>
+            <div class="wirteBox">
+                <div class="topbox">
+                    <p id="title">写评论</p>
+                    <input class="btn" type="button" value="发表" v-on:click="sayBtn">
+                </div>
+                <input type="text" class="inputbtn" placeholder="说点什么吧" v-model="context">
+            </div>
         </mt-popup>
         <div class="function">
             <div>
@@ -38,24 +44,33 @@
 </template>
 <script>
 import { Popup } from 'mint-ui';
-import publish from './publish'
+// import publish from './publish'
 export default {
     data() {
         return {
-            popupVisible:false
+            popupVisible:false,
+            context:""
         }
    },
     methods:{
         
         handleClick:function(){
-            // debugger
             this.popupVisible = true
+        },
+        sayBtn(){
+            console.log(this.aid)
+            console.log(this.context)
+            axios.get('collect/add?text='+this.context+'&aid='+this.aid) 
+            .then(res=>{
+                console.log(res.data)
+            })
+            .catch(err=>{
+            console.log("错误"+err);
+            }); 
         }
     },
-    components:{
-        publish
+
     }
-}
 </script>
 <style scoped>   
 .box{
@@ -99,4 +114,44 @@ input{
     width: 100%;
     height: 1.2rem;
 }
+
+    .box{
+        width: 3.75rem;
+    }
+    .wirteBox{
+        width: 100%;
+        height:1.34rem;;
+        font-size: 0.16rem;
+        color: black;
+        background:#f7f7f7;
+        }
+    #title{
+        float: left;
+        margin-left: 1.26rem;
+        margin-top: 0.17rem;
+    }
+    .topbox .btn{
+        font-size: 0.16rem;
+        width: 0.6rem;
+        height: 0.3rem;
+        background: #fd9b9c;
+        float: right;
+        border-radius:0.16rem;
+        color: white;
+        margin-top: 0.12rem;       
+        margin-right: 11px;
+        outline: none;
+        border: none;
+    }
+
+    .inputbox{
+        width: 96%;
+        background: white;
+        height: 0.79rem;
+        outline: none;
+        border: none;
+        font-size:0.16rem;
+        margin-top: 6px;
+        margin-left: 2%;
+    } 
 </style>

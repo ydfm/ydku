@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2019-11-11 10:18:54
- * @LastEditTime: 2019-11-14 16:23:47
+ * @LastEditTime: 2019-11-15 20:39:44
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \day13d:\workspace\yindongfm\src\components\playDetail.vue
@@ -45,7 +45,8 @@ export default {
         }
     },
     created(){
-        axios.get('/list')
+        
+       axios.get('/menu/selectC4ByC3?aid='+this.id)
          .then(res=>{ 
             // debugger
             // console.log(this.id);

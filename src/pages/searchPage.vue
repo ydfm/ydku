@@ -1,27 +1,34 @@
 <!--
  * @Author: your name
  * @Date: 2019-11-12 09:32:57
- * @LastEditTime: 2019-11-12 17:04:46
+ * @LastEditTime: 2019-11-15 16:37:59
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \day13d:\workspace\yindongfm\src\pages\searchPage.vue
  -->
 <template>
-<div class="box">   
-    <mt-search
-        v-model="value"
-        cancel-text="取消"
-        placeholder="搜索">
-    </mt-search>
+<div class="box">  
+    <!-- <router-link :to='"/serachRes/"+value'> -->
+        <!-- <mt-search
+            v-model="value"
+            cancel-text="取消"
+            placeholder="搜索">
+            <input type="text"  @keyup.enter="serchRes">
+        </mt-search> -->
+    <!-- </router-link>  -->
+
+        <div class="serchbox">
+            <router-link :to='"/searchRes/"+value'>
+                <i class="el-icon-search"></i>
+            </router-link>
+            <input type="text" placeholder="搜索" v-model="value">
+        </div> 
     <div class="showData">
         <h4>热门搜索</h4>
         <ol>
-            <li>小年</li>
-            <li>老梁</li>
-            <li>斗罗大陆</li>
-            <li>环球时报</li>
-            <li>有话要说</li>
-            <li>百家讲坛</li>
+            <li v-for="(list,index) in lists" :key="index">
+                {{list.name}}
+            </li>
         </ol>
     </div>
 </div>
@@ -29,17 +36,52 @@
 </template>
 <script>
 import { Search } from 'mint-ui';
+import axios from 'axios';
 export default {
+    props: [],
     data() {
         return {
-            value:""
+            value:"",
+            lists:""
         }
     },
     methods:{
+    },
+    created(){
+    
+        axios.get('/menu/selectLike?name')      
+        .then(res=>{
+            this.lists=res.data
+             console.log(this.lists)
+        })
+        .catch(err=>{
+            console.log("错误"+err);
+        });
     }
 }
 </script>
 <style scoped>
+.serchbox{
+    width: 90%;
+    font-size: 0.14rem;
+    border: 1px solid #6a6a6a; 
+    margin:0 auto;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    height: 0.3rem;    
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+}
+.el-icon-search{
+    margin-left: 5px;
+    margin-right: 8px;
+}
+.serchbox input{
+    outline: none;
+    border:none;
+    font-size: 0.15rem;
+}
 .showData{
     width: 100%;    
 }
@@ -62,28 +104,10 @@ ol li{
     color: #6a6a6a;
     list-style: decimal outside;
 }  
-li:nth-child(1),li:nth-child(2),li:nth-child(3) {
+li:nth-child(1),li:nth-child(2),li:nth-child(3),li:nth-child(4) {
     color: red;
 }
 
 </style>
-<style>
-    .mint-searchbar-inner{
-        border-radius: 0.18rem!important;
-        font-size: 0.144rem;
-    }
-    .mint-searchbar-core{
-       font-size: 0.14rem; 
-    }
-    .mint-searchbar,.mint-searchbar-cancel{
-        font-size:0.14rem;
-    } 
-    .mintui-search{
-        margin-right: 10px;
-        font-size: 14px!important;
-    }
-    .mint-search{
-        height: 0.5rem;
-        margin-bottom: 0.24rem;
-    }
-</style>
+
+

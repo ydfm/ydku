@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2019-11-12 15:02:51
- * @LastEditTime: 2019-11-13 23:52:04
+ * @LastEditTime: 2019-11-15 20:38:03
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \day13d:\ydku\src\components\ChapterIntroduce.vue
@@ -27,6 +27,7 @@
 <script>
 import axios from 'axios';
 export default {
+    props:['aid'],
     name:"ChapterIntroduce",
     data() {
         return {
@@ -35,7 +36,7 @@ export default {
         }
    },
    created(){
-      axios.get('/list')
+      axios.get('/menu/selectC4ByC3?aid='+this.aid)
          .then(res=>{ 
             this.info=res.data[0]
          })
@@ -64,13 +65,14 @@ export default {
     font-size: 14px;
     position: relative;
     z-index: 1;
+    color: white;
 }
 
 </style>
 <style>
 .el-collapse-item__header{
     background:#423531;
-    color: white;
+    color: white!important;
     border: none !important;
     padding: 0 10px;
     font-size: 14px;

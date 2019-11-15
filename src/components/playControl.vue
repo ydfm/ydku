@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2019-11-11 14:16:46
- * @LastEditTime: 2019-11-14 16:07:25
+ * @LastEditTime: 2019-11-15 20:41:55
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \day13d:\workspace\yindongfm\src\components\playControl.vue
@@ -42,36 +42,22 @@ export default {
             menu:[],
             play:{},
             aid:""
-            // playbc:"playbc2"
         }
     },
     created(){
-        axios.get('/list')
+        axios.get('/menu/selectC4ByC3?aid='+this.id)
         .then(res=>{ 
             this.infos=res.data[0]
-            this.aid=this.info.aid
+            this.aid=this.infos.aid
             this.menu=res.data[0].menu4
                this.$nextTick(function(){
                 for(let i=0;i<this.menu.length;i++){
                     if(this.menu[i].bid==this.id){
                         this.play=this.menu[i];
-                        // console.log("menu[i]"+this.menu[i]);
                         console.log(this.play.url)
                     }
                 }
                 })
-            // console.log(this.id);
-            // this.infos=res.data[0]
-            // this.menu=res.data[0].menu4
-            // console.log(this.menu)
-            // for(let i=0;i<this.menu.length;i++){
-            //     if(this.menu[i].bid==this.id){
-            //         this.play=this.menu[i];
-            //         console.log("menu[i]"+this.menu[i]);
-            //         console.log(this.play.url)
-            //         // return this.play
-            //     }
-            // }
          })
          .catch(err=>{
                console.log("错误"+err);
@@ -81,10 +67,11 @@ export default {
         addFavorite:function(){
          if(this.bc=="backgroundColor:gray"){
             // 传入aid
-            axios.get('api/favorite')
+            console.log(this.aid)
+            axios.get('/collect/add?aid='+this.aid)
             .then(res=>{ 
                console.log(res.data);
-               if(res.data[0].resu=="1"){
+               if(res.data=="1"){
                   this.bc=this.bc="backgroundColor:#fe7272"
                   this.value=true;
                   console.log(this.bc)
@@ -97,10 +84,11 @@ export default {
             }); 
          }else{
              // 传入aid
-            axios.get('api/del')
+            console.log(this.aid)
+            axios.get('/collect/del?aid='+this.aid+"&sid="+"1")
             .then(res=>{ 
                console.log(res.data);
-               if(res.data[0].resu=="1"){
+               if(res.data=="1"){
                   this.bc="backgroundColor:gray"
                   this.value=true;
                   console.log(this.bc)
@@ -127,9 +115,6 @@ export default {
         //         audio.pause(); //暂停
         //     } 
         // }
-    },
-    mounted(){
-        console.log("hahaha"+this.play.url);
     }
 }
 </script>

@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2019-11-09 11:40:55
- * @LastEditTime: 2019-11-14 16:05:23
+ * @LastEditTime: 2019-11-15 20:27:39
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \day13d:\workspace\yindongfm\src\components\ChapterHead.vue
@@ -26,19 +26,20 @@
 <script>
 import axios from 'axios';
 export default {
+   props:['aid'],
    name: 'chaperInfo',
    data () {
       return {
          bc:"backgroundColor:gray",
          info:"",
-         aid:""
+         // aid:""
       }
    },
    created(){
-      axios.get('/list')
+      axios.get('/menu/selectC4ByC3?aid='+this.aid)
          .then(res=>{ 
             this.info=res.data[0]
-            this.aid=this.info.aid
+            // this.aid=this.info.aid
          })
          .catch(err=>{
                console.log("错误"+err);
@@ -48,10 +49,10 @@ export default {
       addFavorite:function(){
          if(this.bc=="backgroundColor:gray"){
             console.log(this.aid)
-            axios.get('/favorite')
+            axios.get('/collect/add?aid='+this.aid)
             .then(res=>{ 
                console.log(res.data);
-               if(res.data[0].resu=="1"){
+               if(res.data=="1"){
                   this.bc=this.bc="backgroundColor:#fe7272"
                   this.value=true;
                   console.log(this.bc)
@@ -64,10 +65,10 @@ export default {
             }); 
          }else{
             console.log(this.aid)
-            axios.get('/del')
+            axios.get('/collect/del?aid='+this.aid+"&sid="+"1")
             .then(res=>{ 
                console.log(res.data);
-               if(res.data[0].resu=="1"){
+               if(res.data=="1"){
                  this.bc="backgroundColor:gray"
                //   this.bc=="backgroundColor:gray"?this.bc="backgroundColor:#fe7272":this.bc="backgroundColor:gray"
                   this.value=true;

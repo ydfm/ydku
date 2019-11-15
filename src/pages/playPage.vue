@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2019-11-11 09:50:50
- * @LastEditTime: 2019-11-13 16:35:21
+ * @LastEditTime: 2019-11-15 20:43:45
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \day13d:\workspace\yindongfm\src\pages\playPage.vue
@@ -11,7 +11,7 @@
         <ChapterHead class="head"></ChapterHead> 
         <playDetail :id="id" class="playDetail"></playDetail> 
         <playControl :id="id"></playControl> 
-        <comment class="comment"></comment> 
+        <comment :id="id" class="comment"></comment> 
         <commentfooter class="cfooter"></commentfooter> 
     </div>      
 </template>
@@ -50,6 +50,6 @@ export default {
 } 
 
 .comment{
-  margin-bottom: 0.46rem;  
+  margin-bottom: 0.5rem;  
 }
 </style>

@@ -1,31 +1,31 @@
 <!--
  * @Author: your name
  * @Date: 2019-11-12 09:32:57
- * @LastEditTime: 2019-11-12 17:03:17
+ * @LastEditTime: 2019-11-15 16:57:33
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \day13d:\workspace\yindongfm\src\pages\searchPage.vue
  -->
 <template>
-<div class="box">   
-    <mt-search
-        v-model="value"
-        cancel-text="取消"
-        placeholder="搜索">
-    </mt-search>
-    <!-- <p>{{value}}</p> -->
+<div class="box" >   
+    <div class="serchbox">
+        <router-link :to='"/searchRes/"+this.value'>
+            <i class="el-icon-search"></i>
+        </router-link>
+        <input type="text" placeholder="搜索" v-model="value">
+    </div>
     <div class="showData">
         <ul>
-            <li>
-                <div class="left"><img src="../assets/img/img.jpg" alt=""></div>
+            <li v-for="(resList,index) in resLists" :key="index">
+                <div class="left"><img :src="resList.pic" alt=""></div>
                 <div class="right">
-                    <h5>情感小说</h5>
-                    <p>关于情，关于爱，关于不为人知的过去关于情，关于爱，关于不为人知的过去</p>
+                    <h5>{{resList.name}}</h5>
+                    <p>{{resList.brief}}</p>
                     <div>
                         <span>
-                            <i class="el-icon-caret-right"></i>2340
+                            <i class="el-icon-caret-right"></i>{{resList.pageviews}}
                         </span>
-                            <i class="el-icon-date"></i>2019-10-10                        </span>
+                            <i class="el-icon-date"></i>2019-10-11
                     </div>
                 </div>
             </li>
@@ -35,18 +35,52 @@
   
 </template>
 <script>
-import { Search } from 'mint-ui';
+// import { Search } from 'mint-ui';
+import axios from 'axios';
 export default {
+    props:['value'],
     data() {
         return {
-            value:""
+            resLists:[]
+
         }
     },
-    methods:{
+    created(){  
+        console.log(this.value)       
+        axios.get('menu/selectLike?name='+this.value)
+         .then(res=>{
+            console.log(res.data)     
+            this.resLists=res.data
+         })
+         .catch(err=>{
+               console.log("错误"+err);
+         }); 
     }
+    
 }
 </script>
 <style scoped>
+.serchbox{
+    width: 90%;
+    font-size: 0.14rem;
+    border: 1px solid #6a6a6a; 
+    margin:0 auto;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    height: 0.3rem;    
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+}
+.el-icon-search{
+    margin-left: 5px;
+    margin-right: 8px;
+}
+.serchbox input{
+    outline: none;
+    border:none;
+    font-size: 0.15rem;
+}
 .showData{
     width: 100%;    
 }
@@ -91,24 +125,4 @@ li{
     margin-right: 12px;
 }
 
-</style>
-<style>
-    .mint-searchbar-inner{
-        border-radius: 0.18rem!important;
-        font-size: 0.14rem;
-    }
-    .mint-searchbar-core{
-       font-size: 0.14rem; 
-    }
-    .mint-searchbar,.mint-searchbar-cancel{
-        font-size:0.14rem;
-    } 
-    .mintui-search{
-        margin-right: 10px;
-        font-size: 14px!important;
-    }
-    .mint-search{
-        height: 0.5rem;
-        margin-bottom: 0.1rem;
-    }
 </style>
