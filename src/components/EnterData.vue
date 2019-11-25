@@ -4,8 +4,14 @@
 			<img src="../assets/img/headImg.jpg" alt="">
 		</div>
 		<div class="middle">
-			<router-link to="/RegisterPage"><h2>立即登录</h2></router-link>
-			<h5>登录后同步你的收藏</h5>
+			<div id="loginBox" v-show="loginStyle">
+				<router-link to="/RegisterPage"><h2>立即登录</h2></router-link>
+				<h5>登录后同步你的收藏</h5>
+			</div>
+			<div id="welcomBox" v-show="welcomStyle">
+				欢迎您：<span v-html="nt"></span>&nbsp;&nbsp;！
+				<input @click="btnLogout" type="button" value="退出">
+			</div>
 		</div>
 		<div class="gift">
 			<div>
@@ -20,10 +26,48 @@
 </template>
 
 <script>
+
+import {getCookie} from '../assets/js/fun.js';
+import {removeCookie} from '../assets/js/fun.js';
+
 export default {
 	name: 'EnterData',
 	data () {
 		return {
+			loginStyle:false,
+			welcomStyle:false,
+			nt:""
+		}
+	},
+	created(){
+		this.showuser();
+	},
+	methods:{
+		showuser(){
+			let tel = getCookie("tel");
+			let name = getCookie("name");
+
+			console.log(tel);
+			console.log(name);
+
+			if(tel != null){
+				this.nt = tel;
+				this.loginStyle = false;
+				this.welcomStyle = true;
+			}else if(name != null){
+				this.nt = name;
+				this.loginStyle = false;
+				this.welcomStyle = true;
+			}
+			else{
+				this.loginStyle = true;
+				this.welcomStyle = false;
+			}
+		},
+		btnLogout(){
+			removeCookie("tel");
+			removeCookie("name");
+			this.showuser();
 		}
 	}
 }
@@ -50,16 +94,20 @@ img{
 .middle{
 	-webkit-flex: 1;
 	padding-left: .11rem;
+	text-align: center;
 }
-h2{
+#loginBox h2{
 	font-size: 16px;
 	color: black;
 	font-weight: 100;
 }
-h5{
+#loginBox h5{
 	font-size: 12px;
 	color: #aaaaaa;
 	font-weight: 100;
+}
+#welcomBox input{
+	margin-top: 10px;
 }
 .gift{
 	width: .92rem;
@@ -89,7 +137,7 @@ h4{
 	color: white;
 	font-weight: 100;
 }
-span{
+.gift span{
 	font-size: 10px;
 	color: #ffcbcb;
 	display: block;

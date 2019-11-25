@@ -5,6 +5,7 @@ import Person from '@/pages/Person'
 import RegisterPage from '@/pages/RegisterPage'
 import LoginPage from '@/pages/LoginPage'
 import ListenPage from '@/pages/ListenPage'
+import CollectPage from '@/pages/CollectPage'
 
 Vue.use(Router)
 
@@ -34,6 +35,11 @@ export default new Router({
 		  path: '/ListenPage',
 		  name: 'ListenPage',
 		  component: ListenPage
+		},
+		{
+		  path: '/CollectPage',
+		  name: 'CollectPage',
+		  component: CollectPage
 		}
-  ]
+  	]
 })

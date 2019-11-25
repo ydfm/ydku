@@ -3,7 +3,7 @@
 		<div class="ban">
 			<EnterData></EnterData>
 			<ul class="ulNav">
-				<li v-for="item in nav">
+				<li v-for="(item,index) in nav" :key="index">
 					<i class="iconfont" :class="item.iconCls"><span>{{item.name}}</span></i>
 				</li>
 			</ul>
@@ -111,7 +111,8 @@ export default {
 					name:"优惠券"
 				}
 			],
-			value: false
+			value: false,
+			disLogin:true
 		}
 	},
 	components:{
@@ -198,5 +199,15 @@ img{
 .footerLogo img{
 	width: 2.07rem;
 	height: .55rem;
+}
+input{
+	width: 100%;
+	height: .4rem;
+	background: linear-gradient(to right,#ff8787 30%,#fe5858 70%);
+	text-align: center;
+	line-height: .4rem;
+	border: 0;
+	outline: 0;
+	border-radius: 8px;
 }
 </style>
