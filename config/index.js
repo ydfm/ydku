@@ -1,3 +1,11 @@
+/*
+ * @Descripttion: 
+ * @version: v1.0.0
+ * @Author: zxs
+ * @Date: 2019-11-12 15:12:18
+ * @LastEditors: zxs
+ * @lastEditTime: Do not Edit
+ */
 'use strict'
 // Template version: 1.3.1
 // see http://vuejs-templates.github.io/webpack for documentation.
@@ -10,7 +18,19 @@ module.exports = {
     // Paths
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
-    proxyTable: {},
+    
+    //解决跨域
+    proxyTable: {
+      '/api': {
+        // target: 'http://10.35.161.160:8080',
+        target: 'http://10.35.161.160:8080',
+        // target: 'http://localhost:3000',
+        changeOrigin: true,
+        pathRewrite: {
+         	 '^/api': ''
+        }
+      }
+    },
 
     // Various Dev Server settings
     host: 'localhost', // can be overwritten by process.env.HOST

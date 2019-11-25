@@ -8,10 +8,10 @@
  -->
 <template>
     <div class="searchbox">
-        <div class="box">
-            <input type="text" :placeholder="tishi">
-            <i class="el-icon-search"></i>
-        </div>
+            <div class="box">
+               <input type="text" placeholder="请输入要搜索的内容" onfocus="this.placeholder=''" onblur="this.placeholder='请输入要搜索的内容'">
+                <i class="el-icon-search"></i>
+            </div>
         <p class="el-icon-time"></p>
     </div>
 </template>
@@ -21,9 +21,11 @@ export default {
   name: 'Search',
   data () {
     return {
-        tishi:"                       请输入要搜索的内容"
     }
-  }
+  },
+  methods:{
+      
+    },
 }
 </script>
 
@@ -44,7 +46,7 @@ export default {
 p{
     float: right;
     position: absolute;
-    left: 60%;
+    right: 3%;
     top: 10%;
     font-size: .32rem;
     color: #999999;
@@ -57,6 +59,7 @@ input{
     border: 0;
     outline: 0;
     border-radius: .25rem;
+    text-align: center;
 }
 i{
     font-size: .21rem;

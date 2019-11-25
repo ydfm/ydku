@@ -9,43 +9,55 @@
 <template>
     <div class="swiper-container">
         <div class="swiper-wrapper">
-            <div class="swiper-slide" v-for="(img,index) in imgs" :key="index">
-                <a v-bind:href="img.href"><img :src="img.src" ></a>
+            <!-- <div class="swiper-slide" v-for="(img,index) in lbt" :key="index"> -->
+            <div class="swiper-slide">
+                <img :src="lbt.url_1" alt="">
+            </div>
+             <div class="swiper-slide">
+                <img :src="lbt.url_2" alt="">
+            </div>
+             <div class="swiper-slide">
+                <img :src="lbt.url_3" alt="">
             </div>
         </div>      
     </div>  
 </template>
 
 <script>
+import Axios from 'axios';
 import Swiper from 'swiper'
+
 
 export default {
   name: 'Banner',
   data () {
     return {
-       imgs:[]
+        lbt:{
+
+        }
     }
   },
   created(){
-     fetch('http://localhost:3000/bannerimgs')
-      .then(res=>{
-        return res.json();
-      })
-      .then(data=>{
-         this.imgs = data;
-         this.$nextTick(function () {
-              let mySwiper = new Swiper('.swiper-container',{
-                   autoplay:true,
-                    speed:300,
-                    grabCursor:true
-              });
-         });
-     })
-        .catch(err=>{
+    Axios.get('/menu/index')  
+    .then(res=>{
+        // console.log(this.lbt);
+        // console.log(res.data)
+        // console.log(res.data.t.url_3)
+
+        // console.log(res.data.t);
+        this.lbt=res.data.t;
+        // this.lbt = data;
+        this.$nextTick(function () {
+            let mySwiper = new Swiper('.swiper-container',{
+                autoplay:true,
+                speed:300,
+                grabCursor:true
+            });
+        });
+    })
+    .catch(err=>{
             console.log(err);
         })
-    },
-    mounted:function(){
     }
 }
 </script>
@@ -63,4 +75,7 @@ img{
     width: 100%;
     height: 100%;
 }
+/* .swiper-slide{
+    display: flex;
+} */
 </style>

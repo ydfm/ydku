@@ -16,13 +16,8 @@
         <Banner></Banner>
         <Nav></Nav>
         <Hot></Hot>
-        <Hot></Hot>
-        <Imgbox></Imgbox>
-        <Hot></Hot>
-        <Hot></Hot>
-        <Hot></Hot>
-        <Hot></Hot>
      </div>
+     <!-- <router-view><router-view -->
      <Myfooter class="bottom"></Myfooter>
   </div>
 </template>
@@ -34,7 +29,7 @@ import Banner from '../components/Banner';
 import Nav from '../components/Nav';
 import Hot from '../components/Hot';
 import Myfooter from '../components/Myfooter';
-import Imgbox from '../components/Imgbox';
+// import Imgbox from '../components/Imgbox';
 
 
 export default {
@@ -45,7 +40,8 @@ export default {
     }
   },
   components:{
-      Mytop,Search,Banner,Nav,Hot,Myfooter,Imgbox
+      Mytop,Search,Banner,Nav,Hot,Myfooter,
+      // Imgbox
   }
 }
 </script>
@@ -61,14 +57,15 @@ export default {
   height: 100%;  
 }
 .fixtop{
-  height: 100%;
   position: fixed;
-  z-index: 10;
+  background: #ffffff;
+  z-index: 5;
 }
 .center{
   flex: 1;
   overflow-y: auto;
   margin-top: 1.34rem;
+  margin-bottom: .7rem;
 }
 .bottom{
   position: fixed;

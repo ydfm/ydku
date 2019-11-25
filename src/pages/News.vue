@@ -8,30 +8,27 @@
  -->
 <template>
   <div class="box">
-    <div class="fixtop"> 
-      <Mytop></Mytop>
-      <Search></Search>
+    <div class="fixtop">     
+      <NewsTop></NewsTop>
+      <Member></Member>
     </div>
      <div class="center">
         <Banner></Banner>
-        <Hot></Hot>
-        <Hot></Hot>
-        <Hot></Hot>
-        <Hot></Hot>
-        <Hot></Hot>
-        <Hot></Hot>
+        <!-- <Nav></Nav> -->
+        <Newscontent></Newscontent>
      </div>
      <Myfooter class="bottom"></Myfooter>
   </div>
 </template>
 
 <script>
-import Mytop from '../components/Mytop';
-import Search from '../components/Search';
+import NewsTop from '../components/NewsTop';
+import Member from '../components/Member';
 import Banner from '../components/Banner';
-import Hot from '../components/Hot';
+// import Nav from '../components/Nav';
+import Newscontent from '../components/Newscontent';
+// import Imgbox from '../components/Imgbox';
 import Myfooter from '../components/Myfooter';
-
 
 export default {
   name: 'HelloWorld',
@@ -41,7 +38,8 @@ export default {
     }
   },
   components:{
-      Mytop,Search,Banner,Hot,Myfooter
+      NewsTop,Member,Banner,Newscontent,Myfooter
+      // ,Nav
   }
 }
 </script>
@@ -57,14 +55,15 @@ export default {
   height: 100%;  
 }
 .fixtop{
-  height: 100%;
   position: fixed;
-  z-index: 10;
+  background: #ffffff;
+  z-index: 5;
 }
 .center{
   flex: 1;
   overflow-y: auto;
   margin-top: 1.34rem;
+  margin-bottom: .7rem;
 }
 .bottom{
   position: fixed;

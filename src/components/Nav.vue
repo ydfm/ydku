@@ -8,40 +8,52 @@
  -->
 <template>
     <div class="navbox">   
-        <ul>
-            <li>
-              <img src="../assets/xiaoshuo.png" alt="">
-              <span>小说</span> 
-            </li>
-            <li>
-              <img src="../assets/zhibo.png" alt="">
-              <span>直播</span> 
-            </li>
-            <li>
-              <img src="../assets/guangbo.png" alt="">
-              <span>广播</span> 
-            </li>
-            <li>
-              <img src="../assets/biting.png" alt="">
-              <span>必听榜单</span> 
-            </li>
-            <li>
-              <img src="../assets/listen.png" alt="">
-              <span>倾听西安</span> 
-            </li>
-        </ul>
+      <ul>   
+        <li>
+          <router-link to="/Novel">
+            <img :src="nav.pic_1" alt="">
+            <span>{{nav.name_1}}</span>
+          </router-link> 
+        </li>
+        <li>
+          <router-link to="/Music">
+            <img :src="nav.pic_2" alt="">
+            <span>{{nav.name_2}}</span> 
+          </router-link>
+        </li>
+        <li>
+          <img :src="nav.pic_3" alt="">
+          <span>{{nav.name_3}}</span> 
+        </li>
+        <li>
+          <img :src="nav.pic_4" alt="">
+          <span>{{nav.name_4}}</span> 
+        </li>
+      </ul>
     </div> 
 </template>
 
 <script>
+import Axios from 'axios';
+
 
 export default {
   name: 'Nav',
   data () {
     return {
-       
+      nav:{},
     }
-  }
+  },
+   created(){
+    Axios.get('/menu/index')   
+    .then(res=>{
+        // console.log(res.data.t);
+        this.nav=res.data.t;
+    })
+    .catch(err=>{
+            console.log(err);
+        })
+    },
 }
 </script>
 <style scoped>
@@ -72,5 +84,8 @@ img{
 span{
     display: block;
    margin: .11rem 0;
+}
+a{
+    color: #666666;
 }
 </style>

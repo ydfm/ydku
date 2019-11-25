@@ -19,7 +19,9 @@ import Axios from 'axios'
 
 Vue.use(ElementUI);
 Vue.use(MintUI);
-Vue.config.productionTip = false
+Vue.config.productionTip = false;
+
+Axios.defaults.baseURL = '/api/';
 
 /* eslint-disable no-new */
 new Vue({

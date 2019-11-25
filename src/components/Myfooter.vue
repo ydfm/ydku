@@ -24,12 +24,11 @@
               </router-link>
             </li>
             <!-- 中间播放 -->
-            <!-- <li>
+            <li>
               <router-link to="">
-                <i class="el-icon-headset"></i>
-                
+                <div class="bf"><i class="el-icon-caret-right"></i></div>
               </router-link>
-            </li> -->
+            </li>
             <li>
               <router-link to="">
                 <i class="el-icon-video-play"></i>
@@ -90,5 +89,14 @@ a{
 }
 .index a{
   color: #fe706c;
+}
+.bf{
+  width: .45rem;
+  height: .45rem;
+  background: #c5c2c2;
+  border-radius: 50%;
+}
+.el-icon-caret-right{
+  line-height: .45rem;
 }
 </style>
